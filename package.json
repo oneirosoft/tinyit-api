@@ -3,12 +3,17 @@
   "version": "1.0.50",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "bun run --watch src/index.ts"
+    "dev": "bun run --watch src/index.ts --env-file .env"
   },
   "dependencies": {
+    "@azure/data-tables": "^13.3.0",
+    "@azure/functions": "^4.7.0",
+    "@elysiajs/cors": "^1.2.0",
+    "dayjs": "^1.11.13",
     "elysia": "latest"
   },
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.13",
     "bun-types": "latest"
   },
   "module": "src/index.js"

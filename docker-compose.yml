@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      AZURE_CONN_STRING: ${AZURE_CONN_STRING}
+      AZURE_TABLE_NAME: ${AZURE_TABLE_NAME}
+      AZURE_PARTITION_KEY: ${AZURE_PARTITION_KEY}
+    depends_on:
+      - azurite
+    networks:
+      - backend
+
+  azurite:
+    container_name: azurite
+    image: mcr.microsoft.com/azure-storage/azurite
+    restart: unless-stopped
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
