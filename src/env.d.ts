@@ -5,5 +5,6 @@ declare namespace NodeJS {
         AZURE_TABLE_NAME: string,
         AZURE_PARTITION_KEY: string,
         ORIGIN: string,
+        API_PREVIEW_URL: string
     }
 }

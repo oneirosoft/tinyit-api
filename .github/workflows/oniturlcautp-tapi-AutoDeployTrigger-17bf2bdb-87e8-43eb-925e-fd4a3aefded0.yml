@@ -41,7 +41,7 @@ jobs:
           registryPassword: ${{ secrets.ONITURLCAUTPTAPI_REGISTRY_PASSWORD }}
           containerAppName: oniturlcautp-tapi
           resourceGroup: oniturlrgutp
-          imageToBuild: oneiro-hdd8aqdbhufwh7h7.azurecr.io/oniturlcautp-tapi:${{ github.sha }}
+          imageToBuild: oneiro-hdd8aqdbhufwh7h7.azurecr.io/tinyit-api:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
 

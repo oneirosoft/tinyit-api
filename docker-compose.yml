@@ -10,6 +10,7 @@ services:
       AZURE_CONN_STRING: ${AZURE_CONN_STRING}
       AZURE_TABLE_NAME: ${AZURE_TABLE_NAME}
       AZURE_PARTITION_KEY: ${AZURE_PARTITION_KEY}
+      API_PREVIEW_URL: ${API_PREVIEW_URL}
     depends_on:
       - azurite
     networks:
@@ -21,6 +22,15 @@ services:
     restart: unless-stopped
     networks:
       - backend
+
+  link-preview:
+    image: oneiro/link-preview:latest	
+    container_name: link-preview
+    restart: unless-stopped
+    networks:
+      - backend
+    
+
 
 networks:
   backend:

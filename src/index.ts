@@ -2,6 +2,7 @@ import { Elysia, t } from 'elysia'
 import E from './endpoints'
 import { corsOptions } from './cors';
 import { isNullOrEmpty } from './utils';
+import { getMetadata } from './apis/linkPreview';
 
 const createResponse = {
   body: t.Object({
@@ -12,6 +13,12 @@ const createResponse = {
 const getInput = {
   params: t.Object({
     id: t.String(),
+  }),
+}
+
+const previewInput = {
+  query: t.Object({
+    url: t.String(),
   }),
 }
 
@@ -30,6 +37,20 @@ const app = new Elysia()
         set.status = 200
         return { url: result.url.href }
       }, getInput)
+      .get('/metadata', async ({ query, set }) => {
+        if (isNullOrEmpty(query.url)) {
+          set.status = 400
+          return { error: 'URL is required' }
+        }
+        const result = await getMetadata(query.url)
+        if (!result) {
+          set.status = 404
+          return { error: 'Not found' }
+        }
+        set.status = 200
+        return result
+
+      }, previewInput)
       .put(
         '/shorten',
         async ({ body, set }) => {
